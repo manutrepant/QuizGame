@@ -1,0 +1,85 @@
+h1{
+    font-size: 25px;
+}
+
+#contentProgressbar{
+    height: 20px;
+}
+
+#progressbar{
+    width: 0%;
+    height: 20px;
+    background-color: green;
+}
+
+#question{
+font-size: 14px;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+div{
+    border: 1px solid black;
+    text-align: center;
+}
+
+#points{
+    height: 25px;
+}
+
+#question{
+    height: 40px;
+}
+
+#response{
+    height: 40px;
+}
+
+.buttonQuestion{
+ background-color: rgb(189, 197, 212);
+ text-align: center;
+ border-radius: 6px;
+ padding: 1em;
+ width: 80%;
+ cursor: grab;
+}
+
+.buttonQuestion:hover{
+    background-color: rgb(158, 169, 190);
+   }
+
+   button[disabled]
+   {
+    cursor: not-allowed; /* affiche interdit*/
+    /* pointer-events:none; */
+   }
+
+   #questionPicture{
+
+       background-image: url("../img/quiz.jpg");
+       background-repeat: no-repeat;
+       background-size: contain;
+       background-position: center;
+       background-color: white;
+       min-height: 300px;
+       border: 5px red solid;
+
+   }
+
+
+
+
+/* button[disabled]:active, button[disabled],
+input[type="button"][disabled]:active,
+input[type="button"][disabled],
+input[type="submit"][disabled]:active,
+input[type="submit"][disabled] ,
+button[disabled]:hover,
+input[type="button"][disabled]:hover,
+input[type="submit"][disabled]:hover
+{
+  border: 2px outset ButtonFace;
+  color: GrayText;
+  cursor: inherit;
+  background-color: #ddd;
+  background: #ddd;
+} */
