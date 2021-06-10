@@ -2,7 +2,8 @@ import{mesDonnees} from './data.js';
 // console.log(mesDonnees[0][1]); // Affiche data.js
 
 var currentItemIndex = 0;
-console.log("Index de Départ :" + currentItemIndex);
+// console.log("Index de Départ :" + currentItemIndex);
+
 
 // ------------------------------------Preload images----------------------------------------
 
@@ -39,8 +40,7 @@ class Images{
 
                     img.onload = function() {
                         preload(imageArray, index + 1);
-                    }
-                    
+                    }                  
                     img.src = "/set/img/"+images[index];     
             }
         }
@@ -98,6 +98,10 @@ monTableau(){
     } 
 }
 
+// **********************************************************************************************
+let chargerTableau = new CreateArrayQuestion(mesDonnees);
+// console.log(chargerTableau.monTableauV()); // OK
+
 
 // -------------------------------------------------------------------------------
 
@@ -113,21 +117,16 @@ function game(){
 
 
 function StartGame(){
-
-    // console.log(Object.keys(mesDonnees).length+ " Nombre de questions data.js");
-    let chargerTableau = new CreateArrayQuestion(mesDonnees);
-    new MyQuestionInterface(chargerTableau.monTableauV());
-
+    this.mesD=chargerTableau.monTableauV();
+    let maQuestion = new MyQuestionInterface(currentItemIndex,this.mesD);
 }
-
-
-
 
 // -------------------------------------------------------------------------------
 
 class MyQuestionInterface{
 
-    constructor(mesD,bonneRep,tableauId,indice,tableauQuestion,resultatTableau2){
+    constructor(currentItemIndex,mesD,bonneRep,tableauId,indice,tableauQuestion,resultatTableau2){
+        this.currentItemIndex=currentItemIndex;
         this.mesD=mesD;
         this.bonneRep=bonneRep;
         this.tableauId=tableauId;
@@ -158,33 +157,30 @@ class MyQuestionInterface{
         }
 
         bonneReponseId(tableauId){
-
             tableauId=this.tableauId;
             console.log(tableauId); // b,c,a
             const indice = this.tableauId.findIndex(monIndex => monIndex === "a");
             this.indice=indice;
             console.log(this.indice+ " = indice de A (bonne réponse)"); // 2)
-            document.getElementById("bonIndex").textContent = this.indice;
+            // document.getElementById("bonIndex").textContent = this.indice;
             return this.indice;
         }
 
         afficheLaQuestion(){
-            // console.log(currentItemIndex)
-            console.log(this.mesD)
 
-            console.log(this.tableauId + " : Série abc mélangée (121)");
-            let tableauQuestion=this.mesD[currentItemIndex];// 6,2,8..[0] = 6
-            // let tableauQuestion=this.resultatTableau2[currentItemIndex];// 6,2,8..[0] = 6
+            console.log(this.mesD + " /  mon mesD"); // 1er tour ok, 2eme = index error !
+            this.currentItemIndex = currentItemIndex;
+
+            console.log(this.currentItemIndex + " Index (question +1 ) en cours ! "); // 0
+            console.log(this.tableauId + " : Série abc mélangée (186)");
+
+            let tableauQuestion=this.mesD[this.currentItemIndex];// 6,2,8..[0] = 6
             
             // index de la question en cours exemple : 0 : 2, 1 : 8 ...
-            console.log(tableauQuestion + " index de la question n° "+ currentItemIndex); //ex: 4
+            console.log(tableauQuestion + " index de la question n° "+ this.currentItemIndex); //ex: 4 **** NO en next
             
             this.bonneRep = mesDonnees[tableauQuestion][1];
             console.log("La Bonne réponse est : "+ this.bonneRep); // berger allemand
-
-            // div a,b,c
-            // tableau id mélangé b,c,a
-            // console.log(this.tableauId);
 
                 // Selection et ajout getId
                 document.getElementsByClassName("buttonQ")[0].addEventListener("click", getId);
@@ -206,7 +202,8 @@ class MyQuestionInterface{
                 document.getElementById("response").textContent = mesDonnees[tableauQuestion][4]; // Fausse réponse 
         
                 this.tableauQuestion=tableauQuestion;
-                console.log(this.tableauQuestion+" Index de la question en cours "); // ok, ex: 3
+                // console.log(this.tableauQuestion+" Index de la question en cours "); // ok, ex: 3
+                // console.log('************************************* stop ***************************** new quiz')
             }
 }
 
@@ -216,7 +213,9 @@ class MyQuestionInterface{
 function getId(){
 
        // Ce bouton cliqué
-        const boutonClique = this;
+        // const boutonClique = this;
+        let conversion = -1;
+        // alert(boutonClique)
 
         // id de l'element
         const idBouton = this.getAttribute('id');
@@ -226,31 +225,28 @@ function getId(){
                 switch (idBouton) {
                     case 'a':
                     console.log('A.');
+                    conversion = 0;
+                    console.log(conversion);
                     break;
+                    
                     case 'b':
                     console.log('B.');
+                    conversion = 1;
+
                     break;
+                    
                     case 'c':
                     console.log('C.');
+                    conversion = 2;
                     break;
+                    
                     default:
                     alert("Réponse non autorisée");
                 }
+
+        // *****Appel Reponse *************************
+        // new Reponse()
 }
-
-
-class Id extends MyQuestionInterface {
-
-    constructor(indice){
-        super(indice);
-        this.checkId();
-    }
-
-    checkId(){
-        console.log(this.indice+ " Indice dans Class Id");
-    }
-}
-
 
 class Reponse{
 
@@ -261,13 +257,6 @@ class Reponse{
         }
 
             maFct(){
-            // console.log(MelangeAbc.bonneReponseId.indice);
-            
-            // let b = new MelangeAbc;
-            // let c = b.bonneReponseId();
-            // alert(c);    
-            
-            // this.indice = c; // ex: b,(a),c
             console.log(this.indice + " Le bon index du A ");
 
             let divAcliquer = -1; // init div;
@@ -301,86 +290,47 @@ class Reponse{
         }
 }
 
-// Appel classe
-// let a = new MelangeAbc();
 
 
-// console.log(a.melAbc()); // appel et nouvel objet
+// ***************************** Previous / Next  *****************************
 
-// let b = a.melAbc();
-// console.log(b); // appel et nouvel objet
+let nombreQuestionMax=Object.keys(mesDonnees).length;
 
+// --- previous  --------------------------------------------------------------------------------------
 
-// ----------------------------------------------------------------------------
+    document.getElementById("previous").onmousedown = function getPrevious()
+        {
+            if(currentItemIndex!==0){
+            currentItemIndex--;
+            alert(currentItemIndex);
+            this.mesD=chargerTableau.monTableauV();
+            new MyQuestionInterface(currentItemIndex,this.mesD);
 
+            }
 
-// function previousNext(tableauId){
+            if(currentItemIndex==0){
+            alert("Désactive le bouton");
+            }
+        }   
 
-//     let a =  new MelangeAbc;
-//     let b = a.melAbc();
-//     this.tableauId=b;
-//     console.log(this.tableauId + " : Série abc mélangée (121)");
+// --- next --------------------------------------------------------------------------------------
 
+    document.getElementById("next").onmousedown =  function getNext()
+        {
+            if(currentItemIndex!==nombreQuestionMax){
+                currentItemIndex++;
+                // this.mesD=chargerTableau.monTableauV()[currentItemIndex]; // index
+                this.mesD=chargerTableau.monTableauV();
+                // console.log(this.mesD + " tableau mesD 323 CLIC"); // errrrrrrrror
+                // console.log(currentItemIndex) + " CLIC Bouton";
 
-//         console.log(this.mesD + " Liste entière");
-//         let tableauQuestion=this.mesD;
-//         this.tableauId=tableauId;
+            new MyQuestionInterface(currentItemIndex,this.mesD); // **************** NO
+                // console.log(chargerTableau.monTableauV()); // OK
+                // console.log(chargerTableau.monTableauV()[1]); // OK index
 
-//         console.log(tableauQuestion[currentItemIndex]+" tableau question index courant")
-//         // Bouton Previous
-
-
-//         document.getElementById("previous").onmousedown = function getPrevious()
-//         {
-//                 if(currentItemIndex!==0){
-//                 currentItemIndex--; // décompte
-//                 console.log(currentItemIndex);
-//                 }
+                }
     
-//                 if(currentItemIndex==0){
-//                 alert("Désactive le bouton"); // si 0
-//                 }
-
-//                 // question();
-//                 return currentItemIndex
-//             } 
-
-// // Bouton Next
-
-//         document.getElementById("next").onmousedown = function getNext()
-//         {
-//             // let tableauId=20;
-//             alert(this.tableauId)
-            
-//             // Longeur du nombre de questions
-//             const nombreQuestionMax= Object.keys(mesDonnees).length;
-
-//             if(currentItemIndex!==nombreQuestionMax){
-//                 currentItemIndex++; // ajout
-//                 console.log(currentItemIndex+" Bouton Next"); // 0,1,2,3 ...
-//                 console.log(mesDonnees[tableauQuestion[currentItemIndex]][0]);
-
-//             // Titre question
-//             document.getElementById("question").textContent = mesDonnees[tableauQuestion[currentItemIndex]][0]; // Ma question 
-
-//             // Boutons A,B,C
-//             document.getElementById(this.tableauId[0]).textContent = mesDonnees[tableauQuestion[currentItemIndex]][1]; // ex: b = 
-//             document.getElementById(this.tableauId[1]).textContent = mesDonnees[tableauQuestion[currentItemIndex]][2]; // ex: a
-//             document.getElementById(this.tableauId[2]).textContent = mesDonnees[tableauQuestion[currentItemIndex]][3]; // ex: c
-
-//             // info mauvaise réponse
-//             document.getElementById("response").textContent = mesDonnees[tableauQuestion[currentItemIndex]][4]; // Fausse réponse 
-
-//                 }
-    
-//                 if(currentItemIndex==nombreQuestionMax){
-//                 alert("Désactive le bouton next"); // hors limite
-//                 }
-
-//                 return currentItemIndex;
-//         }
-
-// }
-
-
-
+                if(currentItemIndex==nombreQuestionMax){
+                alert("Désactive le bouton next");
+                }
+        }
