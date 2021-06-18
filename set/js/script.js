@@ -5,6 +5,8 @@ import{mesDonnees} from './data.js';
 // Initialisation 
 let currentItemIndex = 0;
 let total = 0;
+const longeurTableauQuestion = Object.keys(mesDonnees).length;
+
 
 // Désactiver Ecran question
 document.getElementById("game1").style.display = "none";
@@ -37,7 +39,7 @@ document.getElementById("game1").style.display = "none";
   
     creationListeImage() {
       console.log(Object.keys(mesDonnees).length + " Nombre de questions data.js")
-      this.objectLength = Object.keys(mesDonnees).length // 3
+      this.objectLength = Object.keys(mesDonnees).length;
   
       let images = [] // tableau des noms des images ["1.jpg","2.jpg","3.jpg"]
   
@@ -69,11 +71,12 @@ document.getElementById("game1").style.display = "none";
   // -----------------------  points  -----------------------------------
 
 class mespoints{
-constructor(currentItemIndex,points){
-  this.currentItemIndex=currentItemIndex
-  this.points=points;
-  this.count();
-}
+
+  constructor(currentItemIndex,points){
+    this.currentItemIndex=currentItemIndex
+    this.points=points;
+    this.count();
+  }
 
 count(){
   // console.log(this.points + " = point reçu"); // point reçu question
@@ -90,25 +93,21 @@ count(){
   tabSum[1]=sum; // 1
   // console.log(sum + "  sum = tabSum[1]"); // 1
 
-
-  console.log(tabSum + " tableau des sommes tab[0] + tab[1] "); // 1  -> calcul 1
+  // console.log(tabSum + " tableau des sommes tab[0] + tab[1] "); // 1  -> calcul 1
   // console.log(this.currentItemIndex+1) + " question n° "; // index 1
 
   const conversionIndexEnCours = parseInt(currentItemIndex+1); // 1,2,3,4 ...
   // console.log(conversionIndexEnCours + " Question n°");
 
-  let affichePourcentage = 0;
+  let affichePourcentage = (sum/conversionIndexEnCours)*100;
 
   // console.log((sum/conversionIndexEnCours)*100+ " %"); // 1 / 1 = 1 x 100 = 100%
-  total = sum; // 1
-   
+  
+  document.getElementById("moyenne").textContent = "Ta moyenne : " + Math.trunc(affichePourcentage)+ " %";
+  total = sum; // 1 
 }
 
 }
-
-
-
-
 
   // -----------------------création de mon tableau  -----------------------------------
   
@@ -164,7 +163,7 @@ count(){
   // -------------------------------------------------------------------------------
   
   // Cacher écran de GameOver
-  document.getElementById("End").style.display = "none"
+  document.getElementById("ecranfin").style.display = "none";
   
   // Lancer le jeu par un bouton
   function game() {
@@ -232,9 +231,9 @@ count(){
 
         // Afficher de 1 à x 
         if(currentItemIndex>=nombreQuestionMax){
-          document.getElementById("points").textContent = " Question n° "+ parseInt(currentItemIndex-1);
+          document.getElementById("points").textContent = " Question n° "+ parseInt(currentItemIndex-1) + " / " + longeurTableauQuestion;
         } else {
-          document.getElementById("points").textContent = " Question n° "+ parseInt(currentItemIndex+1);
+          document.getElementById("points").textContent = " Question n° "+ parseInt(currentItemIndex+1) + " / " + longeurTableauQuestion;
         }
       
 
@@ -302,6 +301,7 @@ count(){
   // ----------------------------------------------------------------------------
   
   function getId(idButton, bonneReponse, idC) { // idButton de cette function = id , bonneReponseId()
+    
     let conversion = -1;
   
     switch (idButton) {
@@ -310,7 +310,7 @@ count(){
         // console.log(conversion + "  correspond index = cliqué sur le bouton : A");
   
         toggleAnswerButtons(false); // Désactiver
-        if(idC==10){desactivNext(false);}else{desactivNext(true)};
+        if(idC==longeurTableauQuestion-1){desactivNext(false);}else{desactivNext(true)};
         break
   
       case "b":
@@ -318,14 +318,14 @@ count(){
         // console.log(conversion + " correspond index = cliqué sur le bouton : B")
   
         toggleAnswerButtons(false);
-        if(idC==10){desactivNext(false);}else{desactivNext(true)};
+        if(idC==longeurTableauQuestion-1){desactivNext(false);}else{desactivNext(true)};
         
         break
   
       case "c":
         conversion = 2 // 2
         // console.log(conversion + "  correspond index = cliqué sur le bouton : C")
-        if(idC==10){desactivNext(false);}else{desactivNext(true)};
+        if(idC==longeurTableauQuestion-1){desactivNext(false);}else{desactivNext(true)};
         toggleAnswerButtons(false);
 
         break
@@ -340,11 +340,22 @@ count(){
   
         if (conversion == bonneReponse[0]) { // Bonne réponse
           document.getElementById("response").textContent = " BONNE REPONSE !";
+
+            if(idC==longeurTableauQuestion-1){
+              document.getElementById("ecranfin").style.display = "block";
+            } // si cliqué et fin des questions
+
+          // --------
           new mespoints(idC,1);
 
 
         } else { // Mauvaise réponse
           document.getElementById("response").textContent = mesDonnees[bonneReponse[1]][4];
+            if(idC==longeurTableauQuestion-1){
+              document.getElementById("ecranfin").style.display = "block"
+            } // si cliqué et fin des questions
+
+        // --------
           new mespoints(idC,0);
         }
   }
@@ -353,7 +364,7 @@ count(){
   
   let nombreQuestionMax = Object.keys(mesDonnees).length
   
-  // --- previous --------------------------------------------------------------------------------------
+  // --- previous à adpater --------------------------------------------------------------------------------------
   
     // document.getElementById("previous").onmousedown = function getPrevious() {
     //   if (currentItemIndex !== 0) {
@@ -392,15 +403,14 @@ count(){
   
       new MyQuestionInterface(currentItemIndex, this.mesD)
       // console.log(chargerTableau.monTableauV()); // OK
-      // console.log(chargerTableau.monTableauV()[1]); // OK index
-  
+      // console.log(chargerTableau.monTableauV()[1]); // OK index 
       // console.log(currentItemIndex + " / "+ nombreQuestionMax);
   
       // si fin des questions
       if (currentItemIndex !== nombreQuestionMax -1) {
         desactivNext(false);
       }
-  
+
       // if (currentItemIndex == nombreQuestionMax || currentItemIndex >= nombreQuestionMax)  {       
       //   console.log(currentItemIndex + " en crourq")
 
@@ -411,10 +421,10 @@ count(){
         
       // }
 
-      else {
-        console.log("DESACTIVER ! ");
+      else { // Désactive le bouton next quand dernière question
+        // console.log("DESACTIVER le bouton NEXT ! ");
         desactivNext(true);
-      }
 
+      }
     }
   }

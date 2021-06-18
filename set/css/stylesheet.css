@@ -26,6 +26,11 @@ div{
     height: 25px;
 }
 
+#moyenne{
+    height: 25px;
+    background-color: springgreen;
+}
+
 #question{
     height: 40px;
 }
@@ -115,15 +120,12 @@ div{
        background-color: aqua;
    }
 
-   #End{
-    position: absolute;
-    top:0;
-    z-index: 10;
-    width: 100%;
-    height: 100%;
-    /* background-color: blue; */
-    display: none;
-    color: white
+  
 
-   }
+#ecranfin{
 
+    height: 100px;
+    background-color: teal;
+    position: relative;
+    top: 20px;
+}

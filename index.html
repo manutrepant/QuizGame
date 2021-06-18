@@ -8,59 +8,59 @@
     <link type="text/css" rel="stylesheet" href="/set/css/stylesheet.css">
 </head>
 <body>
-
-<h1>Quiz Game</h1>
+        <!-- Fin jeu -->
+        <div id="ecranfin">
+            Terminé
+        </div>
 
 <div id="mainContent">
 
+
+
+    <!-- Ecran intro -->
+            
+            <div id="containIntro">
+                <div id="part1">Mon Image</div> 
+                <div id="part2">     
+                    <div><h1>Testez vos connaissances</h1>Des questions s'affichent dans un ordre aléatoire. Fais le bon choix et essaye les 100 % !
+                    <div><button id="game">Lancer le Quiz</button></div>
+                    </div>     
+                </div>
+            </div>
+
     
-    <div id="containIntro">
+    <!-- Ecran Jeu  -->
 
-        <div id="part1">Mon Image</div> 
-        <div id="part2">
-            <div>Lorem Ipsum ceci est un quiz, la règle est facile.
-                <div><button id="game">Jouer au Quiz</button></div>
-            </div>     
-        </div>
+            <div id="game1">
+                <div id="boutonPLay"><button id="restart">Recommencer le Quiz !</button></div>
+                <div id="points"></div>
+                <div id="moyenne"></div>
+                <div id="contentProgressbar">
+                <div id="progressbar"></div>
+            
+                </div>
+                <div id="question">La question à répondre</div>
+                <div id="questionPicture"></div>
+                <div id="response"></div> 
 
-    </div>
-    
-    <div id="game1">
+                <div id="show_Hide"> 
+                    <div><button id="a" class="buttonQ">Réponse A</button></div>
+                    <div><button id="b" class="buttonQ">Réponse B</button></div>
+                    <div><button id="c" class="buttonQ">Réponse C</button></div>
+                </div>         
+                    <div id="nextPrev">
+                    <!-- <button id="previous">Question précédente</button> -->
+                    <button id="next">Question suivante ...</button>          
+                    </div> 
+            </div>
 
-        <div id="boutonPLay"><button id="restart">Recommencer le Quiz !</button></div>
-
-        <div id="points">Votre moyenne : </div>
-        <div id="contentProgressbar">
-        <div id="progressbar"></div>
-    
-        </div>
-        <div id="question">La question à répondre</div>
-        <div id="questionPicture"></div>
-        <div id="response">***</div> 
-
-        <div id="show_Hide"> 
-            <div><button id="a" class="buttonQ">Réponse A</button></div>
-            <div><button id="b" class="buttonQ">Réponse B</button></div>
-            <div><button id="c" class="buttonQ">Réponse C</button></div>
-        </div>
-    
-            <div id="nextPrev">
-                <!-- <button id="previous">Question précédente</button> -->
-                <button id="next">Question suivante</button>  
-                  
-            </div> 
-    </div>
 </div>
 
-<div id="End">
-    <h2>Jeu terminé : Ton score est de</h2>
-</div>
+<!-- Fin mainContent -->
 
-
-<input id="rep" type="hidden" value="-1"/>
-<!-- <script  type='module' src="set/js/script.js" async></script> -->
+<!-- <input id="rep" type="hidden" value="-1"/> -->
 <script  type='module' src="set/js/script.js"></script>
-<div id="bonIndex"></div>
+
 
 
 
