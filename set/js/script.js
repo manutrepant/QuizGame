@@ -1,15 +1,29 @@
 import{mesDonnees} from './data.js';
 // console.log(mesDonnees[0][1]); // Affiche data.js
 
-  
-  let currentItemIndex = 0
-  
-  // Désactiver / Activer  boutons
+
+// Initialisation 
+let currentItemIndex = 0;
+let total = 0;
+
+// Désactiver Ecran question
+document.getElementById("game1").style.display = "none";
+
+// Désactiver / Activer  boutons
+
     const toggleAnswerButtons = (enabled = true) => {
         const buttons = document.querySelectorAll("#a,#b,#c")
         for (const button of buttons) button.disabled = !enabled
     }
 
+// Désactiver Next par défaut (oblige à répondre pour avoir accès au bouton next)
+
+    // function
+        const desactivNext = (enabled = true) => {
+        const buttonNext = document.getElementById("next");
+        buttonNext.disabled = !enabled;}
+    // -----
+        desactivNext(false);
   
   // ------------------------------------Preload images----------------------------------------
   
@@ -52,6 +66,50 @@ import{mesDonnees} from './data.js';
   
   new Images()
   
+  // -----------------------  points  -----------------------------------
+
+class mespoints{
+constructor(currentItemIndex,points){
+  this.currentItemIndex=currentItemIndex
+  this.points=points;
+  this.count();
+}
+
+count(){
+  // console.log(this.points + " = point reçu"); // point reçu question
+  const nbrQ = (Object.keys(mesDonnees).length);//11
+  // console.log(nbrQ + " Nombre de questions");
+
+  let tabSum = [this.points,total]; // 1, 0
+  // console.log(tabSum+ " tabSum = [point][total]")
+
+  // console.log(tabSum);
+  const sum = tabSum[0]+tabSum[1]; // 1 + 0
+  // console.log(sum +" tab[0] + tab[1]"); // calcul 1
+
+  tabSum[1]=sum; // 1
+  // console.log(sum + "  sum = tabSum[1]"); // 1
+
+
+  console.log(tabSum + " tableau des sommes tab[0] + tab[1] "); // 1  -> calcul 1
+  // console.log(this.currentItemIndex+1) + " question n° "; // index 1
+
+  const conversionIndexEnCours = parseInt(currentItemIndex+1); // 1,2,3,4 ...
+  // console.log(conversionIndexEnCours + " Question n°");
+
+  let affichePourcentage = 0;
+
+  // console.log((sum/conversionIndexEnCours)*100+ " %"); // 1 / 1 = 1 x 100 = 100%
+  total = sum; // 1
+   
+}
+
+}
+
+
+
+
+
   // -----------------------création de mon tableau  -----------------------------------
   
   class CreateArrayQuestion {
@@ -86,7 +144,7 @@ import{mesDonnees} from './data.js';
       }
   
       // Mélanger tableau général
-      shuffleArray(tableauQuestion)
+    shuffleArray(tableauQuestion)
       this.mesD = tableauQuestion
       console.log(this.mesD) // Bon Tableau
       return this.mesD
@@ -117,14 +175,20 @@ import{mesDonnees} from './data.js';
   game() // Activer function
   
   function StartGame() {
+
+    //  Désactiver écran intro du jeu
+    document.getElementById("containIntro").style.display = "none";
+
     this.mesD = chargerTableau.monTableauV()
     new MyQuestionInterface(currentItemIndex, this.mesD)
   
     // Afficher le quiz CSS
+
     let afficheGame1 = document.getElementById("game1")
     afficheGame1.style.display = "block"
   }
   
+
   // -------------------------------------------------------------------------------
   
   class MyQuestionInterface {
@@ -159,12 +223,22 @@ import{mesDonnees} from './data.js';
   
     bonneReponseId() {
       // const indice = this.tableauId.findIndex((monIndex) => monIndex == "a")
-      console.log(this.tableauId[0]); // b... premier index b,c,a
+      // console.log(this.tableauId[0]); // b... premier index b,c,a
       this.indice = ["a","b","c"].indexOf(this.tableauId[0]); // a = 0,1 ou 2
-      return [this.indice, this.mesD[this.currentItemIndex]];
+      return [this.indice, this.mesD[this.currentItemIndex], this.currentItemIndex];
     }
   
     afficheLaQuestion() {
+
+        // Afficher de 1 à x 
+        if(currentItemIndex>=nombreQuestionMax){
+          document.getElementById("points").textContent = " Question n° "+ parseInt(currentItemIndex-1);
+        } else {
+          document.getElementById("points").textContent = " Question n° "+ parseInt(currentItemIndex+1);
+        }
+      
+
+
       // Réinitialisation des 3 boutons après chaque question getId
       document.getElementById("response").textContent = "";
       
@@ -199,9 +273,8 @@ import{mesDonnees} from './data.js';
     
             for (const button of buttons) {
                 const id = button.getAttribute("id"); // attribut id
-                button.onclick = () => getId(id, bonneReponse); // ajout onclick avec paramètres id et bonneReponse
+                button.onclick = () => getId(id, bonneReponse, this.currentItemIndex); // ajout onclick avec paramètres id et bonneReponse
             }
-  
 
 // ------------------------------------------------------------
 
@@ -213,93 +286,99 @@ import{mesDonnees} from './data.js';
       document.getElementById("question").textContent = mesDonnees[tableauQuestion][0] // Ma question
       // console.log(this.tableauId + "    (abc, bac... )");
   
-      console.log(this.tableauId) // b,c,a
+      // console.log(this.tableauId) // b,c,a
       this.tableauQuestion = tableauQuestion
   
       for (let index = 0; index < 3; index++) {
-        console.log(this.tableauId[index])
+        // console.log(this.tableauId[index]);
         let maQ = document.getElementById(this.tableauId[index])
-        maQ.textContent = mesDonnees[tableauQuestion][index + 1]
+        maQ.textContent = mesDonnees[tableauQuestion][index + 1];
+        // index(0,1,2) / a,b,c / id c,a,b 
+        // console.log(index, ["a", "b", "c"][index], maQ);
       }
     }
   }
   
   // ----------------------------------------------------------------------------
   
-  function getId(idButton, bonneReponse) { // idButton de cette function = id , bonneReponseId()
-    let conversion = -1
+  function getId(idButton, bonneReponse, idC) { // idButton de cette function = id , bonneReponseId()
+    let conversion = -1;
   
     switch (idButton) {
       case "a":
         conversion = 0 // 0
-        console.log(conversion + "  correspond index = cliqué sur le bouton : A")
+        // console.log(conversion + "  correspond index = cliqué sur le bouton : A");
   
         toggleAnswerButtons(false); // Désactiver
+        if(idC==10){desactivNext(false);}else{desactivNext(true)};
         break
   
       case "b":
         conversion = 1 // 1
-        console.log(conversion + " correspond index = cliqué sur le bouton : B")
+        // console.log(conversion + " correspond index = cliqué sur le bouton : B")
   
         toggleAnswerButtons(false);
+        if(idC==10){desactivNext(false);}else{desactivNext(true)};
+        
         break
   
       case "c":
         conversion = 2 // 2
-        console.log(conversion + "  correspond index = cliqué sur le bouton : C")
-  
+        // console.log(conversion + "  correspond index = cliqué sur le bouton : C")
+        if(idC==10){desactivNext(false);}else{desactivNext(true)};
         toggleAnswerButtons(false);
+
         break
   
       default:
         conversion = -1
-        alert("Réponse non autorisée")
+        alert("Réponse non autorisée");
+        desactivNext(false); // Désactiver
     }
   
-    // Bonne et mauvaise réponse
+// Bonne et mauvaise réponse ------------------------------------------------
   
-    if (conversion == bonneReponse[0]) {
-      // console.log(conversion+" = conversion / res[0] = " + res[0]);
-      document.getElementById("response").textContent = " BONNE REPONSE !"
-      alert("VRAI : La touche ABC tapée : " + conversion + " la bonne réponse : " + bonneReponse[0])
-      // console.log("Bonne réponse");
-    } else {
-      alert("FAUX : La touche ABC tapée : " + conversion + " la bonne réponse : " + bonneReponse[0])
-      console.log(conversion + " = conversion / res[0] = " + bonneReponse[0])
-      document.getElementById("response").textContent = mesDonnees[bonneReponse[1]][4]
-    }
+        if (conversion == bonneReponse[0]) { // Bonne réponse
+          document.getElementById("response").textContent = " BONNE REPONSE !";
+          new mespoints(idC,1);
+
+
+        } else { // Mauvaise réponse
+          document.getElementById("response").textContent = mesDonnees[bonneReponse[1]][4];
+          new mespoints(idC,0);
+        }
   }
   
   // ***************************** Previous / Next  *****************************
   
   let nombreQuestionMax = Object.keys(mesDonnees).length
   
-  // --- previous  --------------------------------------------------------------------------------------
+  // --- previous --------------------------------------------------------------------------------------
   
-  document.getElementById("previous").onmousedown = function getPrevious() {
-    if (currentItemIndex !== 0) {
-      currentItemIndex--
-      // alert(currentItemIndex);
-      this.mesD = chargerTableau.monTableauV()
-      new MyQuestionInterface(currentItemIndex, this.mesD) // ******************************
-    }
-  
-    if (currentItemIndex == 0) {
-      // Bouton previous inactif
-      let monBoutonADesactiverP = document.getElementById("previous")
-      monBoutonADesactiverP.disabled = true
-  
-      // si max question désactive
-      let monBoutonADesactiverN = document.getElementById("next")
-      monBoutonADesactiverN.disabled = false
-    }
-  
-    if (currentItemIndex !== nombreQuestionMax - 1) {
-      // si max question désactive
-      let monBoutonADesactiverN = document.getElementById("next")
-      monBoutonADesactiverN.disabled = false
-    }
-  }
+    // document.getElementById("previous").onmousedown = function getPrevious() {
+    //   if (currentItemIndex !== 0) {
+    //     currentItemIndex--
+    //     // alert(currentItemIndex);
+    //     this.mesD = chargerTableau.monTableauV()
+    //     new MyQuestionInterface(currentItemIndex, this.mesD) // ******************************
+    //   }
+    
+    //   if (currentItemIndex == 0) {
+    //     // Bouton previous inactif
+    //     let monBoutonADesactiverP = document.getElementById("previous")
+    //     monBoutonADesactiverP.disabled = true
+    
+    //     // si max question désactive
+    //     let monBoutonADesactiverN = document.getElementById("next")
+    //     monBoutonADesactiverN.disabled = false
+    //   }
+    
+    //   if (currentItemIndex !== nombreQuestionMax - 1) {
+    //     // si max question désactive
+    //     let monBoutonADesactiverN = document.getElementById("next")
+    //     monBoutonADesactiverN.disabled = false
+    //   }
+    // }
   
   // --- next --------------------------------------------------------------------------------------
   
@@ -318,17 +397,24 @@ import{mesDonnees} from './data.js';
       // console.log(currentItemIndex + " / "+ nombreQuestionMax);
   
       // si fin des questions
-      if (currentItemIndex !== nombreQuestionMax - 1) {
-        // Bouton previous actif
-        let monBoutonADesactiverP = document.getElementById("previous")
-        monBoutonADesactiverP.disabled = false
+      if (currentItemIndex !== nombreQuestionMax -1) {
+        desactivNext(false);
       }
   
-      if (currentItemIndex == nombreQuestionMax - 1) {
-        // si max question désactive
-        let monBoutonADesactiverN = document.getElementById("next")
-        monBoutonADesactiverN.disabled = true
+      // if (currentItemIndex == nombreQuestionMax || currentItemIndex >= nombreQuestionMax)  {       
+      //   console.log(currentItemIndex + " en crourq")
+
+        // let monBoutonADesactiverN = document.getElementById("next");
+        // monBoutonADesactiverN.disabled = true;
+        // monBoutonADesactiverN.display = "none";
+      //   // desactivNext(false);
+        
+      // }
+
+      else {
+        console.log("DESACTIVER ! ");
+        desactivNext(true);
       }
+
     }
   }
-  

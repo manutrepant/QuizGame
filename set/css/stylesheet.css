@@ -65,26 +65,53 @@ div{
 
    }
 
+
+   #containIntro{
+    display: flex;
+}
+
+
+#part1, #part2{
+    height: 300px;
+    width: 50%;
+}
+
+
+#part1{
+ background-image: url("../img/intro.jpg");
+ background-position: center;
+ background-repeat: no-repeat;
+ background-size: cover; 
+}
+
+
+ #part2{
+
+     background-color: red;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+
+
+ #game{ 
+     
+    padding: 5px;
+    margin: 10px;
+    
+}
+
+
+
+   /* Ecran du jeu */
    #game1{
 
-    border: 5px solid green;
+    background-color: rgb(231, 233, 236);
     /* display: none; */
-
    }
-
-   #p1, #p2{
-       height: 300px;
-       width: 50%;
-   }
-
-   #p2{
-    display: inline-block;
-    vertical-align: top;   
-   }
-
 
    #boutonPLay{
-       border: 1px solid yellow;
        background-color: aqua;
    }
 
@@ -100,18 +127,3 @@ div{
 
    }
 
-/* button[disabled]:active, button[disabled],
-input[type="button"][disabled]:active,
-input[type="button"][disabled],
-input[type="submit"][disabled]:active,
-input[type="submit"][disabled] ,
-button[disabled]:hover,
-input[type="button"][disabled]:hover,
-input[type="submit"][disabled]:hover
-{
-  border: 2px outset ButtonFace;
-  color: GrayText;
-  cursor: inherit;
-  background-color: #ddd;
-  background: #ddd;
-} */
