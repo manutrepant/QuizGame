@@ -28,10 +28,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
 </head>
 <body>
-        <!-- Fin jeu -->
-        <div id="ecranfin">
-            Terminé
-        </div>
+
 
 <div id="mainContent">
     <!-- Ecran intro -->
@@ -41,7 +38,7 @@
                 <div id="part2">     
                     <div>
                         <h1>Testez vos connaissances</h1>
-                        <p>Des questions s'affichent dans un ordre aléatoire. Fais le bon choix et essaye les 100 % !</p>
+                        <p>Des questions s'affichent dans un ordre aléatoire. Fais le bon choix et essaye les 100 % ! (version 1.0)</p>
                     <div><button id="game">Lancer le Quiz</button></div>
                     </div>     
                 </div>
@@ -51,6 +48,17 @@
     <!-- Ecran Jeu  -->
 
             <div id="game1">
+
+                    <!-- Fin jeu -->
+                    <div id="ecranfin">
+                        <div id="infoEcranFin">
+                        <p id="score"></p>
+                        <div><button id="replay" onclick="history.go(0)">Rejouer le Quiz</button>
+                    </div>
+                    </div>
+
+                    </div>
+
                 <div class="containTF"><div id="trueFalse"></div></div>
                 <div id="boutonPLay"><button id="restart">Recommencer le Quiz !</button></div>
                 <div id="points"></div>

@@ -104,6 +104,7 @@ class mespoints{
       // console.log((sum/conversionIndexEnCours)*100+ " %"); // 1 / 1 = 1 x 100 = 100%
       
       document.getElementById("moyenne").textContent = "Moyenne : " + Math.trunc(affichePourcentage)+ " %";
+      document.getElementById("score").textContent = "Moyenne : " + Math.trunc(affichePourcentage)+ " %";
       total = sum; // 1 
     }
 }
@@ -168,13 +169,12 @@ class mespoints{
   // Lancer le jeu par un bouton
   function game() {
     let play = document.getElementById("game");
-    play.onclick = StartGame // quand clique on lance la fonction StartGame()
+    play.onclick = StartGame // quand clique on lance la fonction StartGame();
   }
 
   // --------
   game() // Activer function
 
-  
   function StartGame() {
 
     //  Désactiver écran intro du jeu
@@ -347,7 +347,7 @@ class mespoints{
           // bonneReponse[0]; // orange buttonQ
           let boutonsOrange=document.getElementsByClassName("buttonQ");
           // console.log(bonneReponse[0] + " bouton bonne réponse"); // Montrer la réponse
-          boutonsOrange[bonneReponse[0]].style.backgroundColor = "orange";
+          boutonsOrange[bonneReponse[0]].style.backgroundColor = "#3771b7";
                 
          
             if(idC==longeurTableauQuestion-1){
@@ -361,7 +361,7 @@ class mespoints{
           document.getElementById("response").textContent = mesDonnees[bonneReponse[1]][4];
 
           let boutonsOrange=document.getElementsByClassName("buttonQ");
-          boutonsOrange[bonneReponse[0]].style.backgroundColor = "orange"; // ok
+          boutonsOrange[bonneReponse[0]].style.backgroundColor = "#3771b7"; // ok
             
           
           if(idC==longeurTableauQuestion-1){

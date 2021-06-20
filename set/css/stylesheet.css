@@ -1,5 +1,7 @@
 html {
     height: 100%;
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
   }
 
   body {
@@ -25,6 +27,7 @@ html {
     border-radius: 6px;
     -webkit-box-shadow: 4px 6px 13px -3px rgba(0,0,0,0.36); 
     box-shadow: 4px 6px 13px -3px rgba(0,0,0,0.36);
+        background-color: white;
 }
 
 #containIntro p{
@@ -89,7 +92,7 @@ div{
     vertical-align: middle;
 }
 
-.buttonQ, button, #game {
+.buttonQ, button, #game, #replay {
     margin: 2px 0 2px 0;
     border-radius: 6px;
     text-align: center;
@@ -172,7 +175,7 @@ button[disabled]
    }
 
 /* Bouton  */
- #game, #next{    
+ #game, #next, #replay{    
     padding: 1em;
     margin: 10px;   
     font-size: 1em;
@@ -186,6 +189,14 @@ button[disabled]
 
 #game{
     background-color: #76a5de;
+    color: white;
+}
+
+
+#replay{
+    padding: 0.7em;
+    margin: 10px; 
+    background-color: black;
     color: white;
 }
 
@@ -285,12 +296,25 @@ button[disabled]
 
 
 /* Div écran GameOver */
+#infoEcranFin{
+    position: relative;
+    top: 270px;
+    text-align: center;
+
+}
 
 #ecranfin{
-    height: 100px;
-    background-color: teal;
-    position: relative;
-    top: 20px;
+    z-index: 1000;
+    background-image: url("../img/gameOver.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    border-radius: 6px;
+    width: 320px;
+    height: 568px;
+    position: absolute;
+    background-color: white;
+    text-align: center;
     display: none;
 }
 
