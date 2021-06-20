@@ -43,10 +43,8 @@
                     </div>     
                 </div>
             </div>
-
-    
+   
     <!-- Ecran Jeu  -->
-
             <div id="game1">
 
                     <!-- Fin jeu -->

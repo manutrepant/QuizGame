@@ -104,7 +104,6 @@ div{
 }
 
 .buttonQ {
-    /* width: 100%; */
     background-color: #76a5de;
     color: white;
     font-size: 1em;
@@ -162,7 +161,6 @@ div{
 button[disabled]
    {
     cursor: not-allowed; /* affiche interdit*/
-    /* pointer-events:none; */
    }
 
 #questionPicture{
@@ -200,10 +198,6 @@ button[disabled]
     color: white;
 }
 
-/* #nextPrev{
-    border:1px solid red;
-} */
-
 
 /*  Div jeu */
 
@@ -220,7 +214,6 @@ button[disabled]
 
 
    #trueFalse{
-    /* visibility: visible; */
     visibility: hidden;
     background-image: url("../img/vrai.png");
     background-repeat: no-repeat;
@@ -232,21 +225,11 @@ button[disabled]
     top: 0px;
     left: 45px;
     z-index: 999;
-
-    /* position: absolute;
-    animation-duration: 5s;
-    animation-name: animationDiv;
-    animation-iteration-count: 1;
-    -webkit-animation-name:animationDiv;
-    -webkit-animation-fill-mode: forwards;
-    -webkit-animation-duration:1s; */
- 
    }
 
 /* animation vrai faux */
 
 .animationDiv{ 
-    /* position: absolute; */
     animation-duration: 5s;
     animation-name: animationDiv;
     animation-iteration-count: 1;

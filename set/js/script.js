@@ -1,5 +1,4 @@
 import{mesDonnees} from './data.js';
-// console.log(mesDonnees[0][1]); // Affiche data.js
 
 // Initialisation 
 let currentItemIndex = 0; // Question en cours
@@ -79,23 +78,14 @@ class mespoints{
   }
 
     count(){
-      // console.log(this.points + " = point reçu"); // point reçu question
       const nbrQ = (Object.keys(mesDonnees).length);//11
-      // console.log(nbrQ + " Nombre de questions");
 
       let tabSum = [this.points,total]; // 1, 0
-      // console.log(tabSum+ " tabSum = [point][total]")
 
       // console.log(tabSum);
       const sum = tabSum[0]+tabSum[1]; // 1 + 0
-      // console.log(sum +" tab[0] + tab[1]"); // calcul 1
 
       tabSum[1]=sum; // 1
-      // console.log(sum + "  sum = tabSum[1]"); // 1
-
-      // console.log(tabSum + " tableau des sommes tab[0] + tab[1] "); // 1  -> calcul 1
-      // console.log(this.currentItemIndex+1) + " question n° "; // index 1
-
       const conversionIndexEnCours = parseInt(currentItemIndex+1); // 1,2,3,4 ...
       // console.log(conversionIndexEnCours + " Question n°");
 
@@ -126,15 +116,14 @@ class mespoints{
   // ---------
       monTableau() {
   
-      // let objectLength = Object.keys(mesDonnees).length; // 3
       this.objectLength = Object.keys(mesDonnees).length
   
       // On crée un tableau contenant le même nombre de question
-      let tableauQuestion = []
+      let tableauQuestion = [];
   
       for (let i = 0; i < this.objectLength; i++) {
-        tableauQuestion.push(i)
-        // console.log(tableauQuestion);
+        tableauQuestion.push(i);
+
       }
   
       // On mélange les valeurs du tableau
@@ -160,7 +149,6 @@ class mespoints{
   
   // **********************************************************************************************
   let chargerTableau = new CreateArrayQuestion(mesDonnees);
-  // console.log(chargerTableau.monTableauV()); // OK
   // -------------------------------------------------------------------------------
   
   // Cacher écran de GameOver
@@ -212,19 +200,14 @@ class mespoints{
       const id = ["a", "b", "c"]
       // Mélanger les questions 1x
       id.sort(() => Math.random() - 0.5)
-      // console.log(id); // tableau mélangé b,c,a
   
       // Mélanger les questions et inverser
       const tableauId = id.reverse()
-      // console.log(tableauId + " : 2ème Mélange abc "); // tableau mélangé b,c,a
   
       this.tableauId = tableauId // this (b,c,a)
-      // console.log(this.tableauId);
     }
   
     bonneReponseId() {
-      // const indice = this.tableauId.findIndex((monIndex) => monIndex == "a")
-      // console.log(this.tableauId[0]); // b... premier index b,c,a
       this.indice = ["a","b","c"].indexOf(this.tableauId[0]); // a = 0,1 ou 2
       return [this.indice, this.mesD[this.currentItemIndex], this.currentItemIndex];
     }
@@ -248,24 +231,14 @@ class mespoints{
       let cacheDiv = document.getElementById("boutonPLay")
       cacheDiv.style.display = "none"
   
-      // console.log(this.mesD + " /  mon mesD"); // 1er tour ok, 2eme = index error !
-      this.currentItemIndex = currentItemIndex;
-  
-      // console.log(this.currentItemIndex + " Index (question +1 ) en cours ! "); // 0
-      // console.log(this.tableauId + " : Série abc mélangée (186)");
-  
+      this.currentItemIndex = currentItemIndex;  
       let tableauQuestion = this.mesD[this.currentItemIndex] // 6,2,8..[0] = 6
-  
       // index de la question en cours exemple : 0 : 2, 1 : 8 ...
-      // console.log(tableauQuestion + " index de la question n° "+ this.currentItemIndex); //ex: 4 **** NO en next
-  
       this.bonneRep = mesDonnees[tableauQuestion][1]
-      // console.log("La Bonne réponse est : "+ this.bonneRep); // berger allemand
   
 
 // Ajout fonction sur boutons getId() ------------------------------------
 
-        // Bonne Réponse = le return de la méthode [this.indice, this.mesD[this.currentItemIndex]
         const bonneReponse = this.bonneReponseId();
 
         const buttons = document.getElementsByClassName("buttonQ"); // Sélection buttons
@@ -280,19 +253,14 @@ class mespoints{
       const imageEssais = document.querySelector("#questionPicture")
       imageEssais.style.backgroundImage = "url(" + "/set/img/" + tableauQuestion + ".jpg" + ")"
   
-      // Titre question (ici indentique)
+      // Titre question (ici identique)
       document.getElementById("question").textContent = mesDonnees[tableauQuestion][0] // Ma question
-      // console.log(this.tableauId + "    (abc, bac... )");
-  
-      // console.log(this.tableauId) // b,c,a
+
       this.tableauQuestion = tableauQuestion
   
       for (let index = 0; index < 3; index++) {
-        // console.log(this.tableauId[index]);
         let maQ = document.getElementById(this.tableauId[index])
         maQ.textContent = mesDonnees[tableauQuestion][index + 1];
-        // index(0,1,2) / a,b,c / id c,a,b 
-        // console.log(index, ["a", "b", "c"][index], maQ);
       }
     }
   }
@@ -306,7 +274,6 @@ class mespoints{
     switch (idButton) {
       case "a":
         conversion = 0 // 0
-        // console.log(conversion + "  correspond index = cliqué sur le bouton : A");
   
         toggleAnswerButtons(false); // Désactiver
         if(idC==longeurTableauQuestion-1){desactivNext(false);}else{desactivNext(true)};
@@ -314,7 +281,6 @@ class mespoints{
   
       case "b":
         conversion = 1 // 1
-        // console.log(conversion + " correspond index = cliqué sur le bouton : B")
   
         toggleAnswerButtons(false);
         if(idC==longeurTableauQuestion-1){desactivNext(false);}else{desactivNext(true)};
@@ -323,7 +289,6 @@ class mespoints{
   
       case "c":
         conversion = 2 // 2
-        // console.log(conversion + "  correspond index = cliqué sur le bouton : C")
         if(idC==longeurTableauQuestion-1){desactivNext(false);}else{desactivNext(true)};
         toggleAnswerButtons(false);
 
@@ -341,14 +306,10 @@ class mespoints{
           document.getElementById("response").textContent = " Bonne réponse !";
 
       // LancerAnimation
-          // console.log("BONNE réponse lancer Animation");
           lancerAnimation(1); // 1 = vignette verte
 
-          // bonneReponse[0]; // orange buttonQ
           let boutonsOrange=document.getElementsByClassName("buttonQ");
-          // console.log(bonneReponse[0] + " bouton bonne réponse"); // Montrer la réponse
-          boutonsOrange[bonneReponse[0]].style.backgroundColor = "#3771b7";
-                
+          boutonsOrange[bonneReponse[0]].style.backgroundColor = "#3771b7";               
          
             if(idC==longeurTableauQuestion-1){
               document.getElementById("ecranfin").style.display = "block";
@@ -369,7 +330,6 @@ class mespoints{
             } // si cliqué et fin des questions
 
         // LancerAnimation
-        // console.log("Mauvaise réponse lancer Animation");
          lancerAnimation(0); // 0 = vignette rouge
 
         // --------
@@ -384,20 +344,15 @@ class mespoints{
 
  function lancerAnimation(vraiFaux){
 
-  // let vignette = vraiFaux;
-  // console.log(vraiFaux + " Dans fonction");
-
     const a = document.getElementById('trueFalse');
     a.style.visibility = "visible"; // rendre le div visible (hidden)
     a.classList.add('animationDiv'); // ajout de la class qui lance l'animation
 
       if(vraiFaux==0){
-          // console.log("Rond Rouge"); 
           a.style.backgroundImage = "url('../set/img/faux.png')";
         } 
         
         if(vraiFaux==1){
-          // console.log("Rond vert"); 
           a.style.backgroundImage = "url('../set/img/vrai.png')";
         } 
 
@@ -408,32 +363,6 @@ class mespoints{
   let nombreQuestionMax = Object.keys(mesDonnees).length
   
   // --- previous à adpater --------------------------------------------------------------------------------------
-  
-    // document.getElementById("previous").onmousedown = function getPrevious() {
-    //   if (currentItemIndex !== 0) {
-    //     currentItemIndex--
-    //     // alert(currentItemIndex);
-    //     this.mesD = chargerTableau.monTableauV()
-    //     new MyQuestionInterface(currentItemIndex, this.mesD) // ******************************
-    //   }
-    
-    //   if (currentItemIndex == 0) {
-    //     // Bouton previous inactif
-    //     let monBoutonADesactiverP = document.getElementById("previous")
-    //     monBoutonADesactiverP.disabled = true
-    
-    //     // si max question désactive
-    //     let monBoutonADesactiverN = document.getElementById("next")
-    //     monBoutonADesactiverN.disabled = false
-    //   }
-    
-    //   if (currentItemIndex !== nombreQuestionMax - 1) {
-    //     // si max question désactive
-    //     let monBoutonADesactiverN = document.getElementById("next")
-    //     monBoutonADesactiverN.disabled = false
-    //   }
-    // }
-  
 
   // --- next --------------------------------------------------------------------------------------
   
@@ -441,7 +370,6 @@ class mespoints{
 
     const desactVignette = document.getElementById('trueFalse');
     const boutonsOrange=document.getElementsByClassName("buttonQ");
-    // console.log(boutonsOrange);
 
     //retirer la couleur et remettre couleur bouton bleu
           for (let index = 0; index < 3; index++) {
@@ -455,16 +383,9 @@ class mespoints{
       desactVignette.style.visibility = "hidden"; // rendre le div visible (hidden)
       desactVignette.classList.remove("animationDiv"); // retirer class
 
-
-      // this.mesD=chargerTableau.monTableauV()[currentItemIndex]; // index
       this.mesD = chargerTableau.monTableauV()
-      // console.log(this.mesD + " tableau mesD 323 CLIC"); // errrrrrrrror
-      // console.log(currentItemIndex) + " CLIC Bouton";
-  
+
       new MyQuestionInterface(currentItemIndex, this.mesD)
-      // console.log(chargerTableau.monTableauV()); // OK
-      // console.log(chargerTableau.monTableauV()[1]); // OK index 
-      // console.log(currentItemIndex + " / "+ nombreQuestionMax);
   
       // si fin des questions 
       if (currentItemIndex !== nombreQuestionMax -1) {  
@@ -473,7 +394,6 @@ class mespoints{
 
 
       else { // Désactive le bouton next quand dernière question
-        // console.log("DESACTIVER le bouton NEXT ! ");
 
         // Cache le bouton next quand dernière question
         document.getElementById("next").style.visibility = "hidden";
