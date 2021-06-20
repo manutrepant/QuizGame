@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Jeu v01 - Jeu quiz (exercice javascript)</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8" />		
+		<meta name="description" content="Jeu de quiz, exercice apprenant en javascript">
+		<meta name="keywords" content="Javascript, js, tutoriel">
+		<meta name="robots" content="ALL">
+		<meta name="distribution" content="Global">
+		<meta name="copyright" content="Emmanuel Trépant">
+		<meta name="author" content="Emmanuel Trépant">
+		<meta name="language" content="Fr">
+		<meta name="doc-type" content="Public">
+		<meta name="doc-class" content="Complet">
+		<meta name="doc-rights" content="Domaine public">
+		<meta name="DateCreated" content="19/06/2021">
+		<meta property="og:title" content="Jeu quiz : Les races de chiens" />
+		<meta property="og:description" content="eu quiz : Les races de chiens - Exercice apprentisage javascript" />
+		<meta property="og:url" content="https://www.trepant.be/cv" />				
+		<link rel="apple-touch-icon" href="apple-touch-icon-iphone.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-ipad.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-iphone-retina-display.png" />
+        <link rel="icon" href="favicon.ico" />
+        <link type="text/css" rel="stylesheet" href="/set/css/reset.css">
+        <link type="text/css" rel="stylesheet" href="/set/css/stylesheet.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+<div id="mainContent">
+    <!-- Ecran intro -->
+            
+            <div id="containIntro">
+                <div id="part1"></div> 
+                <div id="part2">     
+                    <div>
+                        <h1>Testez vos connaissances</h1>
+                        <p>Des questions s'affichent dans un ordre aléatoire. Fais le bon choix et essaye les 100 % ! (version 1.0)</p>
+                    <div><button id="game">Lancer le Quiz</button></div>
+                    </div>     
+                </div>
+            </div>
+
+    
+    <!-- Ecran Jeu  -->
+
+            <div id="game1">
+
+                    <!-- Fin jeu -->
+                    <div id="ecranfin">
+                        <div id="infoEcranFin">
+                        <p id="score"></p>
+                        <div><button id="replay" onclick="history.go(0)">Rejouer le Quiz</button>
+                    </div>
+                    </div>
+
+                    </div>
+
+                <div class="containTF"><div id="trueFalse"></div></div>
+                <div id="boutonPLay"><button id="restart">Recommencer le Quiz !</button></div>
+                <div id="points"></div>
+                <div id="moyenne"></div>
+                <div id="contentProgressbar">
+                <div id="progressbar"></div>
+            
+                </div>
+                <div id="question">La question à répondre</div>
+                <div id="questionPicture"></div>
+                <div id="response"></div> 
+
+                <div id="show_Hide"> 
+                    <div><button id="a" class="buttonQ">Réponse A</button></div>
+                    <div><button id="b" class="buttonQ">Réponse B</button></div>
+                    <div><button id="c" class="buttonQ">Réponse C</button></div>
+                </div>         
+                    <div id="nextPrev">
+                    <!-- <button id="previous">Question précédente</button> -->
+                    <button id="next">Question suivante ...</button>          
+                    </div> 
+            </div>
+
+</div>
+<!-- Fin mainContent -->
+<script  type='module' src="set/js/script.js"></script>
+</body>
+</html>
