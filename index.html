@@ -22,13 +22,22 @@
 		<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-ipad.png" />
 		<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-iphone-retina-display.png" />
         <link rel="icon" href="favicon.ico" />
-        <link type="text/css" rel="stylesheet" href="/set/css/reset.css">
-        <link type="text/css" rel="stylesheet" href="/set/css/stylesheet.css">
+        <link type="text/css" rel="stylesheet" href="set/css/reset.css">
+        <link type="text/css" rel="stylesheet" href="set/css/stylesheet.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
 </head>
 <body>
 
+        <!-- Fin jeu -->
+        <div id="ecranfin">
+            <div id="infoEcranFin">
+            <p id="score"></p>
+            <div><button id="replay" onclick="history.go(0)">Recharger la page</button>
+        </div>
+        </div>
+
+        </div>
 
 <div id="mainContent">
     <!-- Ecran intro -->
@@ -38,35 +47,30 @@
                 <div id="part2">     
                     <div>
                         <h1>Testez vos connaissances</h1>
-                        <p>Des questions s'affichent dans un ordre aléatoire. Fais le bon choix et essaye les 100 % ! (version 1.0)</p>
+                        <p>35 questions s'affichent dans un ordre aléatoire. Fais le bon choix et essaye d'obtenir les 100 % ! (version 1.0)</p>
                     <div><button id="game">Lancer le Quiz</button></div>
                     </div>     
                 </div>
             </div>
+        <div>
+    </div>
+
 
     
     <!-- Ecran Jeu  -->
 
             <div id="game1">
 
-                    <!-- Fin jeu -->
-                    <div id="ecranfin">
-                        <div id="infoEcranFin">
-                        <p id="score"></p>
-                        <div><button id="replay" onclick="history.go(0)">Rejouer le Quiz</button>
-                    </div>
-                    </div>
 
-                    </div>
 
                 <div class="containTF"><div id="trueFalse"></div></div>
                 <div id="boutonPLay"><button id="restart">Recommencer le Quiz !</button></div>
                 <div id="points"></div>
                 <div id="moyenne"></div>
-                <div id="contentProgressbar">
-                <div id="progressbar"></div>
+                <!-- <div id="contentProgressbar"></div> -->
+                <!-- <div id="progressbar"></div> -->
             
-                </div>
+                
                 <div id="question">La question à répondre</div>
                 <div id="questionPicture"></div>
                 <div id="response"></div> 

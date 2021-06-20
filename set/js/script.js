@@ -60,7 +60,7 @@ document.getElementById("game1").style.display = "none";
         img.onload = function () {
           preload(imageArray, index + 1)
         }
-        img.src = "/set/img/" + images[index]
+        img.src = "set/img/" + images[index]
       }
     }
   }
@@ -251,7 +251,7 @@ class mespoints{
 // ------------------------------------------------------------
 
       const imageEssais = document.querySelector("#questionPicture")
-      imageEssais.style.backgroundImage = "url(" + "/set/img/" + tableauQuestion + ".jpg" + ")"
+      imageEssais.style.backgroundImage = "url(" + "set/img/" + tableauQuestion + ".jpg" + ")"
   
       // Titre question (ici identique)
       document.getElementById("question").textContent = mesDonnees[tableauQuestion][0] // Ma question
@@ -322,8 +322,7 @@ class mespoints{
           document.getElementById("response").textContent = mesDonnees[bonneReponse[1]][4];
 
           let boutonsOrange=document.getElementsByClassName("buttonQ");
-          boutonsOrange[bonneReponse[0]].style.backgroundColor = "#3771b7"; // ok
-            
+          boutonsOrange[bonneReponse[0]].style.backgroundColor = "#3771b7"; // ok        
           
           if(idC==longeurTableauQuestion-1){
               document.getElementById("ecranfin").style.display = "block";
@@ -349,11 +348,11 @@ class mespoints{
     a.classList.add('animationDiv'); // ajout de la class qui lance l'animation
 
       if(vraiFaux==0){
-          a.style.backgroundImage = "url('../set/img/faux.png')";
+          a.style.backgroundImage = "url('set/img/faux.png')";
         } 
         
         if(vraiFaux==1){
-          a.style.backgroundImage = "url('../set/img/vrai.png')";
+          a.style.backgroundImage = "url('set/img/vrai.png')";
         } 
 
 }
@@ -397,6 +396,9 @@ class mespoints{
 
         // Cache le bouton next quand dernière question
         document.getElementById("next").style.visibility = "hidden";
+        document.getElementById("game1").style.visibility = "hidden";
+        document.getElementById("ecranfin").style.display = "block";
+
         desactivNext(true);
 
       }
