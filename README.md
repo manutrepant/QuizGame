@@ -3,7 +3,9 @@
 ### Exercice apprenant Javascript.
 
 <b>Démo HTML :</b>
-<https://manutrepant.github.io/quizGame>
+<https://manutrepant.github.io/QuizGame/>
+<br>
+
 <b>Sources :</b>
 <https://github.com/manutrepant/QuizGame>
 
