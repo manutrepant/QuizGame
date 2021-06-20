@@ -1,32 +1,32 @@
 import{mesDonnees} from './data.js';
 // console.log(mesDonnees[0][1]); // Affiche data.js
 
-
 // Initialisation 
-let currentItemIndex = 0;
-let total = 0;
+let currentItemIndex = 0; // Question en cours
+let total = 0; // Calcul moyenne
 const longeurTableauQuestion = Object.keys(mesDonnees).length;
+document.getElementById("next").style.visibility = "visible";
 
 
-// Désactiver Ecran question
+// Désactiver Ecran (2) question 
 document.getElementById("game1").style.display = "none";
 
-// Désactiver / Activer  boutons
-
+// Désactiver / Activer  boutons abc
     const toggleAnswerButtons = (enabled = true) => {
-        const buttons = document.querySelectorAll("#a,#b,#c")
-        for (const button of buttons) button.disabled = !enabled
+        const buttons = document.querySelectorAll("#a,#b,#c");
+        for (const button of buttons) button.disabled = !enabled;
     }
 
 // Désactiver Next par défaut (oblige à répondre pour avoir accès au bouton next)
+// function
 
-    // function
         const desactivNext = (enabled = true) => {
         const buttonNext = document.getElementById("next");
         buttonNext.disabled = !enabled;}
     // -----
         desactivNext(false);
   
+
   // ------------------------------------Preload images----------------------------------------
   
   class Images {
@@ -68,7 +68,7 @@ document.getElementById("game1").style.display = "none";
   
   new Images()
   
-  // -----------------------  points  -----------------------------------
+// -----------------------  points moyenne en % -----------------------------------
 
 class mespoints{
 
@@ -78,38 +78,37 @@ class mespoints{
     this.count();
   }
 
-count(){
-  // console.log(this.points + " = point reçu"); // point reçu question
-  const nbrQ = (Object.keys(mesDonnees).length);//11
-  // console.log(nbrQ + " Nombre de questions");
+    count(){
+      // console.log(this.points + " = point reçu"); // point reçu question
+      const nbrQ = (Object.keys(mesDonnees).length);//11
+      // console.log(nbrQ + " Nombre de questions");
 
-  let tabSum = [this.points,total]; // 1, 0
-  // console.log(tabSum+ " tabSum = [point][total]")
+      let tabSum = [this.points,total]; // 1, 0
+      // console.log(tabSum+ " tabSum = [point][total]")
 
-  // console.log(tabSum);
-  const sum = tabSum[0]+tabSum[1]; // 1 + 0
-  // console.log(sum +" tab[0] + tab[1]"); // calcul 1
+      // console.log(tabSum);
+      const sum = tabSum[0]+tabSum[1]; // 1 + 0
+      // console.log(sum +" tab[0] + tab[1]"); // calcul 1
 
-  tabSum[1]=sum; // 1
-  // console.log(sum + "  sum = tabSum[1]"); // 1
+      tabSum[1]=sum; // 1
+      // console.log(sum + "  sum = tabSum[1]"); // 1
 
-  // console.log(tabSum + " tableau des sommes tab[0] + tab[1] "); // 1  -> calcul 1
-  // console.log(this.currentItemIndex+1) + " question n° "; // index 1
+      // console.log(tabSum + " tableau des sommes tab[0] + tab[1] "); // 1  -> calcul 1
+      // console.log(this.currentItemIndex+1) + " question n° "; // index 1
 
-  const conversionIndexEnCours = parseInt(currentItemIndex+1); // 1,2,3,4 ...
-  // console.log(conversionIndexEnCours + " Question n°");
+      const conversionIndexEnCours = parseInt(currentItemIndex+1); // 1,2,3,4 ...
+      // console.log(conversionIndexEnCours + " Question n°");
 
-  let affichePourcentage = (sum/conversionIndexEnCours)*100;
+      let affichePourcentage = (sum/conversionIndexEnCours)*100;
 
-  // console.log((sum/conversionIndexEnCours)*100+ " %"); // 1 / 1 = 1 x 100 = 100%
-  
-  document.getElementById("moyenne").textContent = "Ta moyenne : " + Math.trunc(affichePourcentage)+ " %";
-  total = sum; // 1 
+      // console.log((sum/conversionIndexEnCours)*100+ " %"); // 1 / 1 = 1 x 100 = 100%
+      
+      document.getElementById("moyenne").textContent = "Moyenne : " + Math.trunc(affichePourcentage)+ " %";
+      total = sum; // 1 
+    }
 }
 
-}
-
-  // -----------------------création de mon tableau  -----------------------------------
+// -----------------------création de mon tableau  -----------------------------------
   
   class CreateArrayQuestion {
     constructor(mesDonnees, mesD, objectLength, monTab, resultat, resultatTableau2) {
@@ -123,7 +122,8 @@ count(){
       this.monTableauV()
     }
   
-    monTableau() {
+  // ---------
+      monTableau() {
   
       // let objectLength = Object.keys(mesDonnees).length; // 3
       this.objectLength = Object.keys(mesDonnees).length
@@ -139,26 +139,26 @@ count(){
       // On mélange les valeurs du tableau
       //(pour éviter de commencer toujours par les mêmes questions)
       function shuffleArray(inputArray) {
-        inputArray.sort(() => Math.random() - 0.5)
+        inputArray.sort(() => Math.random() - 0.5);
       }
   
       // Mélanger tableau général
-    shuffleArray(tableauQuestion)
-      this.mesD = tableauQuestion
-      console.log(this.mesD) // Bon Tableau
-      return this.mesD
+    shuffleArray(tableauQuestion);
+      this.mesD = tableauQuestion;
+      // console.log(this.mesD); // Bon Tableau
+      return this.mesD;
     }
   
     monTableauV() {
-      let tableau = this.mesD
-      let resultatTableau2 = [...tableau]
-      this.resultatTableau2 = resultatTableau2
-      return this.resultatTableau2
+      let tableau = this.mesD;
+      let resultatTableau2 = [...tableau];
+      this.resultatTableau2 = resultatTableau2;
+      return this.resultatTableau2;
     }
   }
   
   // **********************************************************************************************
-  let chargerTableau = new CreateArrayQuestion(mesDonnees)
+  let chargerTableau = new CreateArrayQuestion(mesDonnees);
   // console.log(chargerTableau.monTableauV()); // OK
   // -------------------------------------------------------------------------------
   
@@ -170,8 +170,10 @@ count(){
     let play = document.getElementById("game");
     play.onclick = StartGame // quand clique on lance la fonction StartGame()
   }
-  
+
+  // --------
   game() // Activer function
+
   
   function StartGame() {
 
@@ -182,9 +184,9 @@ count(){
     new MyQuestionInterface(currentItemIndex, this.mesD)
   
     // Afficher le quiz CSS
-
     let afficheGame1 = document.getElementById("game1")
-    afficheGame1.style.display = "block"
+    afficheGame1.style.display = "block";
+
   }
   
 
@@ -236,8 +238,6 @@ count(){
           document.getElementById("points").textContent = " Question n° "+ parseInt(currentItemIndex+1) + " / " + longeurTableauQuestion;
         }
       
-
-
       // Réinitialisation des 3 boutons après chaque question getId
       document.getElementById("response").textContent = "";
       
@@ -277,7 +277,6 @@ count(){
 
 // ------------------------------------------------------------
 
-
       const imageEssais = document.querySelector("#questionPicture")
       imageEssais.style.backgroundImage = "url(" + "/set/img/" + tableauQuestion + ".jpg" + ")"
   
@@ -301,9 +300,9 @@ count(){
   // ----------------------------------------------------------------------------
   
   function getId(idButton, bonneReponse, idC) { // idButton de cette function = id , bonneReponseId()
+    console.log(bonneReponse+" (Bonne réponse / .. / index en cours)");
+    let conversion = -1; // converti a,b,c cliqué en chiffre
     
-    let conversion = -1;
-  
     switch (idButton) {
       case "a":
         conversion = 0 // 0
@@ -339,8 +338,18 @@ count(){
 // Bonne et mauvaise réponse ------------------------------------------------
   
         if (conversion == bonneReponse[0]) { // Bonne réponse
-          document.getElementById("response").textContent = " BONNE REPONSE !";
+          document.getElementById("response").textContent = " Bonne réponse !";
 
+      // LancerAnimation
+          // console.log("BONNE réponse lancer Animation");
+          lancerAnimation(1); // 1 = vignette verte
+
+          // bonneReponse[0]; // orange buttonQ
+          let boutonsOrange=document.getElementsByClassName("buttonQ");
+          // console.log(bonneReponse[0] + " bouton bonne réponse"); // Montrer la réponse
+          boutonsOrange[bonneReponse[0]].style.backgroundColor = "orange";
+                
+         
             if(idC==longeurTableauQuestion-1){
               document.getElementById("ecranfin").style.display = "block";
             } // si cliqué et fin des questions
@@ -348,18 +357,52 @@ count(){
           // --------
           new mespoints(idC,1);
 
-
         } else { // Mauvaise réponse
           document.getElementById("response").textContent = mesDonnees[bonneReponse[1]][4];
-            if(idC==longeurTableauQuestion-1){
-              document.getElementById("ecranfin").style.display = "block"
+
+          let boutonsOrange=document.getElementsByClassName("buttonQ");
+          boutonsOrange[bonneReponse[0]].style.backgroundColor = "orange"; // ok
+            
+          
+          if(idC==longeurTableauQuestion-1){
+              document.getElementById("ecranfin").style.display = "block";
             } // si cliqué et fin des questions
+
+        // LancerAnimation
+        // console.log("Mauvaise réponse lancer Animation");
+         lancerAnimation(0); // 0 = vignette rouge
 
         // --------
           new mespoints(idC,0);
         }
+
+        return bonneReponse;
   }
   
+
+ // *****************************************************************************
+
+ function lancerAnimation(vraiFaux){
+
+  // let vignette = vraiFaux;
+  // console.log(vraiFaux + " Dans fonction");
+
+    const a = document.getElementById('trueFalse');
+    a.style.visibility = "visible"; // rendre le div visible (hidden)
+    a.classList.add('animationDiv'); // ajout de la class qui lance l'animation
+
+      if(vraiFaux==0){
+          // console.log("Rond Rouge"); 
+          a.style.backgroundImage = "url('../set/img/faux.png')";
+        } 
+        
+        if(vraiFaux==1){
+          // console.log("Rond vert"); 
+          a.style.backgroundImage = "url('../set/img/vrai.png')";
+        } 
+
+}
+
   // ***************************** Previous / Next  *****************************
   
   let nombreQuestionMax = Object.keys(mesDonnees).length
@@ -391,11 +434,28 @@ count(){
     //   }
     // }
   
+
   // --- next --------------------------------------------------------------------------------------
   
   document.getElementById("next").onmousedown = function getNext() {
+
+    const desactVignette = document.getElementById('trueFalse');
+    const boutonsOrange=document.getElementsByClassName("buttonQ");
+    // console.log(boutonsOrange);
+
+    //retirer la couleur et remettre couleur bouton bleu
+          for (let index = 0; index < 3; index++) {
+            boutonsOrange[index].style.backgroundColor = "#76a5de";    
+          }
+
     if (currentItemIndex !== nombreQuestionMax) {
       currentItemIndex++
+
+      // Désactiver la vignette vrai ou faux
+      desactVignette.style.visibility = "hidden"; // rendre le div visible (hidden)
+      desactVignette.classList.remove("animationDiv"); // retirer class
+
+
       // this.mesD=chargerTableau.monTableauV()[currentItemIndex]; // index
       this.mesD = chargerTableau.monTableauV()
       // console.log(this.mesD + " tableau mesD 323 CLIC"); // errrrrrrrror
@@ -406,25 +466,22 @@ count(){
       // console.log(chargerTableau.monTableauV()[1]); // OK index 
       // console.log(currentItemIndex + " / "+ nombreQuestionMax);
   
-      // si fin des questions
-      if (currentItemIndex !== nombreQuestionMax -1) {
-        desactivNext(false);
+      // si fin des questions 
+      if (currentItemIndex !== nombreQuestionMax -1) {  
+            desactivNext(false);
       }
 
-      // if (currentItemIndex == nombreQuestionMax || currentItemIndex >= nombreQuestionMax)  {       
-      //   console.log(currentItemIndex + " en crourq")
-
-        // let monBoutonADesactiverN = document.getElementById("next");
-        // monBoutonADesactiverN.disabled = true;
-        // monBoutonADesactiverN.display = "none";
-      //   // desactivNext(false);
-        
-      // }
 
       else { // Désactive le bouton next quand dernière question
         // console.log("DESACTIVER le bouton NEXT ! ");
+
+        // Cache le bouton next quand dernière question
+        document.getElementById("next").style.visibility = "hidden";
         desactivNext(true);
 
       }
     }
   }
+
+
+

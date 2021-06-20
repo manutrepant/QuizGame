@@ -1,131 +1,298 @@
-h1{
-    font-size: 25px;
-}
+html {
+    height: 100%;
+  }
 
-#contentProgressbar{
-    height: 20px;
-}
+  body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
-#progressbar{
-    width: 0%;
-    height: 20px;
-    background-color: green;
-}
-
-#question{
-font-size: 14px;
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-div{
-    border: 1px solid black;
-    text-align: center;
-}
-
-#points{
-    height: 25px;
-}
-
-#moyenne{
-    height: 25px;
-    background-color: springgreen;
-}
-
-#question{
-    height: 40px;
-}
-
-#response{
-    height: 40px;
-}
-
-.buttonQuestion{
- background-color: rgb(189, 197, 212);
- text-align: center;
- border-radius: 6px;
- padding: 1em;
- width: 80%;
- cursor: grab;
-}
-
-.buttonQuestion:hover{
-    background-color: rgb(158, 169, 190);
-   }
-
-   button[disabled]
-   {
-    cursor: not-allowed; /* affiche interdit*/
-    /* pointer-events:none; */
-   }
-
-   #questionPicture{
-
-       background-image: url("../img/quiz.jpg");
-       background-repeat: no-repeat;
-       background-size: contain;
-       background-position: center;
-       background-color: white;
-       min-height: 300px;
-       border: 5px red solid;
-
-   }
-
-
-   #containIntro{
+#mainContent{
     display: flex;
+    justify-content:center;
+    align-items: center;
+    margin: 10px;
+    min-height: 100vh;
 }
 
+#containIntro{
+    width: 320px;
+    height: 568px;
+    align-items:center;
+    align-content:stretch;
+    border: 1px solid rgb(228, 225, 225);
+    border-radius: 6px;
+    -webkit-box-shadow: 4px 6px 13px -3px rgba(0,0,0,0.36); 
+    box-shadow: 4px 6px 13px -3px rgba(0,0,0,0.36);
+}
+
+#containIntro p{
+    padding: 20px;
+    font-size: 0.8rem;
+    color: gray;
+}
 
 #part1, #part2{
-    height: 300px;
-    width: 50%;
+height: 260px;
+margin-top: 12px;
+padding: 5px;
 }
-
 
 #part1{
- background-image: url("../img/intro.jpg");
- background-position: center;
- background-repeat: no-repeat;
- background-size: cover; 
+    background-image: url("../img/intro.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
-
  #part2{
-
-     background-color: red;
      display: flex;
      align-items: center;
      justify-content: center;
  }
 
 
+h1, div, p, div #question {
+    font-family: 'Dela Gothic One', cursive;
+}
 
- #game{ 
-     
+h1{
+    font-size: 1.5rem;
     padding: 5px;
-    margin: 10px;
-    
+}
+
+div #points{
+    font-size: 0.7rem;
+    padding: 10px 0 0 0;
+}
+
+#points{
+    height: 25px;
+    color:rgb(221, 222, 224);
+}
+
+#moyenne{
+    height: 25px;
+    font-size: 0.8rem;
+}
+
+div #question{
+    height: 40px;
+    font-size: 0.9rem;
+    padding: 5px;
+    color: gray;
+}
+
+div{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.buttonQ, button, #game {
+    margin: 2px 0 2px 0;
+    border-radius: 6px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: grab;
+    padding: 0.5em;
+    cursor: grab;
+    border: 0;
+}
+
+.buttonQ {
+    /* width: 100%; */
+    background-color: #76a5de;
+    color: white;
+    font-size: 1em;
 }
 
 
 
-   /* Ecran du jeu */
+.buttonQ:active{
+    background-color:  #6998d1;
+    color: white;
+    font-size: 1em;
+}
+
+.buttonOrange {
+    background-color: #ffa34e;
+    color: white;
+    font-size: 1em;
+}
+
+
+#contentProgressbar{
+    height: 8px;
+}
+
+#progressbar{
+    width: 0%;
+    height: 4px;
+    background-color: green;
+}
+
+.containTF{
+    width: 100%;
+    position: relative;
+    height: 2px;
+}
+
+#response{
+    position: relative;
+    top: -15px;
+    height: 10px;
+    font-size: 0.8rem;
+    padding: 10px 10px;
+    color: #6a6e74;
+}
+
+.buttonQuestion{
+ background-color: #646d77;
+
+}
+
+.buttonQuestion:hover{
+    background-color: #76a5de;
+   }
+
+button[disabled]
+   {
+    cursor: not-allowed; /* affiche interdit*/
+    /* pointer-events:none; */
+   }
+
+#questionPicture{
+    background-image: url("../img/quiz.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: white;
+    min-height: 240px;
+   }
+
+/* Bouton  */
+ #game, #next{    
+    padding: 1em;
+    margin: 10px;   
+    font-size: 1em;
+}
+
+
+#next{
+    padding: 0.5em;
+    margin-bottom: 10px;
+}
+
+#game{
+    background-color: #76a5de;
+    color: white;
+}
+
+/* #nextPrev{
+    border:1px solid red;
+} */
+
+
+/*  Div jeu */
+
    #game1{
-
-    background-color: rgb(231, 233, 236);
-    /* display: none; */
+    background-color: white;
+    display: none;
+    width: 320px;
+    height: 568px;
+    border: 1px solid rgb(228, 225, 225);
+    border-radius: 6px;
+    -webkit-box-shadow: 4px 6px 13px -3px rgba(0,0,0,0.36); 
+    box-shadow: 4px 6px 13px -3px rgba(0,0,0,0.36);
    }
 
-   #boutonPLay{
-       background-color: aqua;
+
+   #trueFalse{
+    /* visibility: visible; */
+    visibility: hidden;
+    background-image: url("../img/vrai.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 0px;
+    left: 45px;
+    z-index: 999;
+
+    /* position: absolute;
+    animation-duration: 5s;
+    animation-name: animationDiv;
+    animation-iteration-count: 1;
+    -webkit-animation-name:animationDiv;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-duration:1s; */
+ 
    }
 
-  
+/* animation vrai faux */
+
+.animationDiv{ 
+    /* position: absolute; */
+    animation-duration: 5s;
+    animation-name: animationDiv;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-name:animationDiv;
+    -webkit-animation-duration:1s;
+    -webkit-animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes animationDiv {
+    0% {
+        margin-top: 0;
+    }
+    10% {
+        margin-top: 150px;
+    }      
+    20% {
+        margin-top: 145px;
+    }
+    30% {
+        margin-top: 150px;
+    }
+    100% {
+        margin-top: 145px;
+    }
+
+}
+
+@keyframes animationDiv {
+    0% {
+        margin-top: 0;
+    }
+    10% {
+        margin-top: 150px;
+    }      
+    20% {
+        margin-top: 145px;
+    }
+    30% {
+        margin-top: 150px;
+    }
+    100% {
+        margin-top: 145px;
+    }
+    
+  }
+
+
+/* Div écran GameOver */
 
 #ecranfin{
-
     height: 100px;
     background-color: teal;
     position: relative;
     top: 20px;
+    display: none;
 }
+
+
+
