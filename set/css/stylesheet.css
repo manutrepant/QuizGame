@@ -326,10 +326,12 @@ top: -150px;
     
     #containIntro{
         width: 95%;
-        height:95vh;
+        min-height:95vh;
         background-color: white;
         padding: 0;
         margin: 0;
+        border:transparent;
+        box-shadow: none;
     }
 
 
@@ -339,6 +341,9 @@ top: -150px;
         background-color: white;
         padding: 0;
         margin: 0;
+        box-shadow: none;
     }
-  
+
+
+
 }

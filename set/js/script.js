@@ -4,11 +4,11 @@ import{mesDonnees} from './data.js';
 let currentItemIndex = 0; // Question en cours
 let total = 0; // Calcul moyenne
 const longeurTableauQuestion = Object.keys(mesDonnees).length;
-document.getElementById("next").style.visibility = "visible";
+document.querySelector("#next").style.visibility = "visible";
 
 
 // Désactiver Ecran (2) question 
-document.getElementById("game1").style.display = "none";
+document.querySelector("#game1").style.display = "none";
 
 // Désactiver / Activer  boutons abc
     const toggleAnswerButtons = (enabled = true) => {
@@ -20,7 +20,7 @@ document.getElementById("game1").style.display = "none";
 // function
 
         const desactivNext = (enabled = true) => {
-        const buttonNext = document.getElementById("next");
+        const buttonNext = document.querySelector("#next");
         buttonNext.disabled = !enabled;}
     // -----
         desactivNext(false);
@@ -37,7 +37,7 @@ document.getElementById("game1").style.display = "none";
     }
   
     creationListeImage() {
-      console.log(Object.keys(mesDonnees).length + " Nombre de questions data.js")
+      // console.log(Object.keys(mesDonnees).length + " Nombre de questions data.js");
       this.objectLength = Object.keys(mesDonnees).length;
   
       let images = [] // tableau des noms des images ["1.jpg","2.jpg","3.jpg"]
@@ -93,8 +93,8 @@ class mespoints{
 
       // console.log((sum/conversionIndexEnCours)*100+ " %"); // 1 / 1 = 1 x 100 = 100%
       
-      document.getElementById("moyenne").textContent = "Moyenne : " + Math.trunc(affichePourcentage)+ " %";
-      document.getElementById("score").textContent = "Moyenne : " + Math.trunc(affichePourcentage)+ " %";
+      document.querySelector("#moyenne").textContent = "Moyenne : " + Math.trunc(affichePourcentage)+ " %";
+      document.querySelector("#score").textContent = "Moyenne : " + Math.trunc(affichePourcentage)+ " %";
       total = sum; // 1 
     }
 }
@@ -147,16 +147,16 @@ class mespoints{
     }
   }
   
-  // **********************************************************************************************
+
   let chargerTableau = new CreateArrayQuestion(mesDonnees);
   // -------------------------------------------------------------------------------
   
   // Cacher écran de GameOver
-  document.getElementById("ecranfin").style.display = "none";
+  document.querySelector("#ecranfin").style.display = "none";
   
   // Lancer le jeu par un bouton
   function game() {
-    let play = document.getElementById("game");
+    let play = document.querySelector("#game");
     play.onclick = StartGame // quand clique on lance la fonction StartGame();
   }
 
@@ -166,13 +166,13 @@ class mespoints{
   function StartGame() {
 
     //  Désactiver écran intro du jeu
-    document.getElementById("containIntro").style.display = "none";
+    document.querySelector("#containIntro").style.display = "none";
 
     this.mesD = chargerTableau.monTableauV()
     new MyQuestionInterface(currentItemIndex, this.mesD)
   
     // Afficher le quiz CSS
-    let afficheGame1 = document.getElementById("game1")
+    let afficheGame1 = document.querySelector("#game1")
     afficheGame1.style.display = "block";
 
   }
@@ -214,21 +214,23 @@ class mespoints{
   
     afficheLaQuestion() {
 
+        const nbrQ = Object.keys(mesDonnees).length-1;
+      
         // Afficher de 1 à x 
         if(currentItemIndex>=nombreQuestionMax){
-          document.getElementById("points").textContent = " Question n° "+ parseInt(currentItemIndex-1) + " / " + longeurTableauQuestion;
+          document.querySelector("#points").textContent = " Question n° "+ parseInt(currentItemIndex-1) + " / " + nbrQ;
         } else {
-          document.getElementById("points").textContent = " Question n° "+ parseInt(currentItemIndex+1) + " / " + longeurTableauQuestion;
+          document.querySelector("#points").textContent = " Question n° "+ parseInt(currentItemIndex+1) + " / " + nbrQ;
         }
       
       // Réinitialisation des 3 boutons après chaque question getId
-      document.getElementById("response").textContent = "";
+      document.querySelector("#response").textContent = "";
       
       // ----- activer boutons
       toggleAnswerButtons(true);
   
       // Cacher l'image de l'intro
-      let cacheDiv = document.getElementById("boutonPLay")
+      let cacheDiv = document.querySelector("#boutonPLay")
       cacheDiv.style.display = "none"
   
       this.currentItemIndex = currentItemIndex;  
@@ -254,12 +256,12 @@ class mespoints{
       imageEssais.style.backgroundImage = "url(" + "set/img/" + tableauQuestion + ".jpg" + ")"
   
       // Titre question (ici identique)
-      document.getElementById("question").textContent = mesDonnees[tableauQuestion][0] // Ma question
+      document.querySelector("#question").textContent = mesDonnees[tableauQuestion][0] // Ma question
 
       this.tableauQuestion = tableauQuestion
   
       for (let index = 0; index < 3; index++) {
-        let maQ = document.getElementById(this.tableauId[index])
+        let maQ = document.getElementById(this.tableauId[index]);//*** */
         maQ.textContent = mesDonnees[tableauQuestion][index + 1];
       }
     }
@@ -303,7 +305,7 @@ class mespoints{
 // Bonne et mauvaise réponse ------------------------------------------------
   
         if (conversion == bonneReponse[0]) { // Bonne réponse
-          document.getElementById("response").textContent = " Bonne réponse !";
+          document.querySelector("#response").textContent = " Bonne réponse !";
 
       // LancerAnimation
           lancerAnimation(1); // 1 = vignette verte
@@ -312,20 +314,20 @@ class mespoints{
           boutonsOrange[bonneReponse[0]].style.backgroundColor = "#3771b7";               
          
             if(idC==longeurTableauQuestion-1){
-              document.getElementById("ecranfin").style.display = "block";
+              document.querySelector("#ecranfin").style.display = "block";
             } // si cliqué et fin des questions
 
           // --------
           new mespoints(idC,1);
 
         } else { // Mauvaise réponse
-          document.getElementById("response").textContent = mesDonnees[bonneReponse[1]][4];
+          document.querySelector("#response").textContent = mesDonnees[bonneReponse[1]][4];
 
           let boutonsOrange=document.getElementsByClassName("buttonQ");
           boutonsOrange[bonneReponse[0]].style.backgroundColor = "#3771b7"; // ok        
           
           if(idC==longeurTableauQuestion-1){
-              document.getElementById("ecranfin").style.display = "block";
+              document.querySelector("#ecranfin").style.display = "block";
             } // si cliqué et fin des questions
 
         // LancerAnimation
@@ -343,7 +345,7 @@ class mespoints{
 
  function lancerAnimation(vraiFaux){
 
-    const a = document.getElementById('trueFalse');
+  const a = document.getElementById('trueFalse');
     a.style.visibility = "visible"; // rendre le div visible (hidden)
     a.classList.add('animationDiv'); // ajout de la class qui lance l'animation
 
@@ -365,9 +367,9 @@ class mespoints{
 
   // --- next --------------------------------------------------------------------------------------
   
-  document.getElementById("next").onmousedown = function getNext() {
+  document.querySelector("#next").onmousedown = function getNext() {
 
-    const desactVignette = document.getElementById('trueFalse');
+    const desactVignette = document.querySelector('#trueFalse');
     const boutonsOrange=document.getElementsByClassName("buttonQ");
 
     //retirer la couleur et remettre couleur bouton bleu
@@ -379,7 +381,7 @@ class mespoints{
       currentItemIndex++
 
       // Désactiver la vignette vrai ou faux
-      desactVignette.style.visibility = "hidden"; // rendre le div visible (hidden)
+      desactVignette.style.visibility = "hidden"; // rendre le div invisible (hidden)
       desactVignette.classList.remove("animationDiv"); // retirer class
 
       this.mesD = chargerTableau.monTableauV()
@@ -387,23 +389,24 @@ class mespoints{
       new MyQuestionInterface(currentItemIndex, this.mesD)
   
       // si fin des questions 
-      if (currentItemIndex !== nombreQuestionMax -1) {  
-            desactivNext(false);
+      // if (currentItemIndex !== nombreQuestionMax -1) {
+
+        if (currentItemIndex !== nombreQuestionMax-1) {  
+      desactivNext(false); //ok
       }
 
 
       else { // Désactive le bouton next quand dernière question
 
         // Cache le bouton next quand dernière question
-        document.getElementById("next").style.visibility = "hidden";
-        document.getElementById("game1").style.visibility = "hidden";
-        document.getElementById("ecranfin").style.display = "block";
+        document.querySelector("#next").style.visibility = "hidden";
+        document.querySelector("#game1").style.visibility = "hidden";
+
+        document.querySelector("#ecranfin").style.display = "block";
+        // Ajouter animation classe anim
 
         desactivNext(true);
 
       }
     }
   }
-
-
-
