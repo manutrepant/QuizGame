@@ -22,7 +22,7 @@ html {
 
 #containIntro{
     width: 320px;
-    height: 568px;
+    min-height: 568px;
     align-items:center;
     align-content:stretch;
     border: 1px solid rgb(228, 225, 225);
@@ -155,8 +155,8 @@ div{
 }
 
 .buttonQuestion:hover{
-    background-color: #76a5de;
-   }
+background-color: #76a5de;
+}
 
 button[disabled]
    {
